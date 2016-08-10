@@ -1,0 +1,80 @@
+datagrid:
+    mass-price-changes-grid:
+        source:
+            acl_resource: pricing.mass_price_change_view
+            type: orm
+            query:
+                select:
+                    - m.id
+                    - m.subject
+                    - m.percentage
+                    - m.currency
+                    - m.referenceExchangeRate
+                from:
+                    - { table: CuanticPricingBundle:MassPriceChange, alias: m }
+        columns:
+            subject:
+                label: Subject
+            percentage:
+                label: Percentage
+            currency:
+                label: Currency
+            referenceExchangeRate:
+                label: Reference Exchange Rate
+        properties:
+            id: ~
+            update_link:
+                type: url
+                route: pricing.mass_price_change_update
+                params:
+                    - id
+            view_link:
+                type: url
+                route: pricing.mass_price_change_view
+                params:
+                    - id
+            delete_link:
+                type: url
+                route: pricing_api_delete_mass_price_change
+                params:
+                    - id
+        sorters:
+            columns:
+                subject:
+                    data_name: m.subject
+                percentage:
+                    data_name: m.percentage
+                currency:
+                    data_name: m.currency
+                referenceExchangeRate:
+                    data_name: m.referenceExchangeRate
+            default:
+                subject: ASC
+        filters:
+            columns:
+                subject:
+                    type: string
+                    data_name: m.subject
+                currency:
+                    type: string
+                    data_name: m.currency
+        actions:
+            view:
+                type:          navigate
+                label:         View
+                link:          view_link
+                icon:          eye-open
+                acl_resource:  pricing.mass_price_change_view
+                rowAction:     true
+            update:
+                type:          navigate
+                label:         Update
+                link:          update_link
+                icon:          edit
+                acl_resource:  pricing.mass_price_change_update
+            delete:
+                type:          delete
+                label:         Delete
+                link:          delete_link
+                icon:          trash
+                acl_resource:  pricing.mass_price_change_delete

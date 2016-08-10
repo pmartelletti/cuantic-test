@@ -1,0 +1,14 @@
+{% extends 'OroUIBundle:actions:index.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% set pageTitle = 'Mass Price Changes'|trans %}
+
+{% block navButtons %}
+    {% if resource_granted('pricing.mass_price_change_view') %}
+        <div class="btn-group">
+            {{ UI.addButton({
+                'path': path('pricing.mass_price_change_create'),
+                'entity_label': 'Mass Price Change'|trans
+            }) }}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% set entity = mass_price_change %}
+
+{% block navButtons %}
+    {% if resource_granted('EDIT', mass_price_change) %}
+        {{ UI.editButton({
+            'path' : path('pricing.mass_price_change_update', { id: mass_price_change.id }),
+            'entity_label': 'Mass Price Change'|trans
+        }) }}
+    {% endif %}
+
+    {% if resource_granted('DELETE', mass_price_change) %}
+        {{ UI.deleteButton({
+            'dataUrl': path('pricing_api_delete_mass_price_change', {'id': mass_price_change.id}),
+            'dataRedirect': path('pricing.mass_price_change_index'),
+            'aCss': 'no-hash remove-button',
+            'id': 'btn-remove-mass_price_change',
+            'dataId': mass_price_change.id,
+            'entity_label': 'Mass Price Change'|trans,
+        }) }}
+    {% endif %}
+{% endblock navButtons %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+    'entity':      mass_price_change,
+    'indexPath':   path('pricing.mass_price_change_index'),
+    'indexLabel': 'Mass Price Change'|trans,
+    'entityTitle': mass_price_change.subject
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{% block content_data %}
+    {% set data %}
+        <div class="widget-content">
+            <div class="row-fluid form-horizontal">
+                <div class="responsive-block">
+                    {{ UI.renderProperty('Subject'|trans, mass_price_change.subject) }}
+                    {{ UI.renderProperty('Percentage'|trans, mass_price_change.percentage) }}
+                    {{ UI.renderProperty('Reference Exchange Rate'|trans, mass_price_change.referenceExchangeRate) }}
+                    {{ UI.renderProperty('Currency'|trans, mass_price_change.currency) }}
+                    <div class="control-group">
+                        <label class="control-label">{{ 'Products' | trans }}</label>
+                        <div class="controls">
+                            {{ UI.entityViewLinks(mass_price_change.products, 'defaultName', 'orob2b_product_view') }}
+                        </div>
+                    </div>
+
+                    {#{{ UI.renderList(mass_price_change.products) }}#}
+                    {#{{ UI.renderProperty('Bought at'|trans, mass_price_change.boughtAt|date) }}#}
+                </div>
+            </div>
+        </div>
+    {% endset %}
+    {% set dataBlocks = [
+    {
+    'title': 'Data'|trans,
+    'class': 'active',
+    'subblocks': [
+    { 'data' : [data] }
+    ]
+    }
+    ] %}
+
+    {% set id = 'mass_price_changeView' %}
+    {% set data = { 'dataBlocks': dataBlocks } %}
+    {{ parent() }}
+{% endblock content_data %}

@@ -1,0 +1,13 @@
+pricing_bundle:
+    resource: "@CuanticPricingBundle/Controller"
+    type: annotation
+
+pricing_api_mass_price_change:
+    resource:     "@CuanticPricingBundle/Controller/Api/Rest/MassPriceChangeController.php"
+    type:         rest
+    prefix:       api/rest/{version}/
+    requirements:
+        version:  latest|v1
+        _format:  json
+    defaults:
+        version:  latest

@@ -1,0 +1,7 @@
+services:
+    pricing.mass_price_change_manager.api:
+        class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
+        parent: oro_soap.manager.entity_manager.abstract
+        arguments:
+            - CuanticPricingBundle\Entity\MassPriceChange
+            - "@doctrine.orm.entity_manager"

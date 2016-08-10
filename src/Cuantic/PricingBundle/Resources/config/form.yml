@@ -1,0 +1,10 @@
+services:
+    pricing.form.type.mass_price_change:
+        class: Cuantic\PricingBundle\Form\Type\MassPriceChangeType
+        tags:
+            - { name: form.type, alias: pricing_mass_price_change }
+
+    pricing.form.type.product_multiselect:
+        class: Cuantic\PricingBundle\Form\Type\ProductMultiSelectType
+        tags:
+            - { name: form.type, alias: cuantic_pricing_product_multiselect }

@@ -1,0 +1,15 @@
+oro_menu_config:
+    items:
+        mass_price_change:
+            label: Mass Price Changes
+            route: pricing.mass_price_change_index
+    tree:
+        application_menu:
+            children:
+                sales_tab:
+                    merge_strategy: append
+                    children:
+                        mass_price_change: ~
+
+#oro_titles:
+#    acme_link: My link page title
